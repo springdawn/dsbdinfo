@@ -1,0 +1,17 @@
+{
+    "name":"dsbdinfo",
+    "version":"0.1",
+    "manifest_version":2,
+
+    "description":"ポスト数を表示",
+
+    "permissions":["http://api.tumblr.com/v2/blog/*"],
+
+    "content_scripts":[
+        {
+            "matches":["http://www.tumblr.com/dashboard*"],
+            "js":["jquery-1.8.2.min.js","info.js"],
+            "css":["popup.css"]
+        }
+    ]
+}
