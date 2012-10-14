@@ -20,11 +20,7 @@
         host = jQuery(obj).attr("href").replace(/http:|\//g, "");
         safeHost = host.replace(/\./g, '\.');
 
-        storage.getBytesInUse(function(bytes) {
-            if(bytes/storage.QUOTA_BYTES <= allowedStorageVolume) fillStorage = false;
-            else fillStorage = true;
-            accessStorage(fillStorage);
-        });
+        accessStorage();
     }
 
     function ifHoverOut() {
@@ -32,12 +28,12 @@
         jQuery(".dsbdinfo_popup").hide(100);
     }
 
-    function accessStorage(flag) {
+    function accessStorage() {
         storage.get(safeHost, function(data) {
             if(jQuery.isEmptyObject(data)===false) {
                 if(Date.now() - data[safeHost].create > expire) {
                     storage.remove(safeHost);
-                    getInfo(flag);
+                    getInfo();
                     return;
                 }
                 blogTitle = data[safeHost].title;
@@ -45,21 +41,23 @@
                 popInfo();
                 return;
             } else {
-                getInfo(flag);
+                getInfo();
                 return;
             }
         });
     }
 
-    function getInfo(flag) {
+    function getInfo() {
         jQuery.get("http://api.tumblr.com/v2/blog/" + host + "/info", {api_key: "uvmddiGyiyHKS0ZGJSVqtEinfIVnyOVp3wUtBGJYPBGrgFKi9S"}, function(data){
             blogTitle = data.response.blog.title;
             postsNumber = data.response.blog.posts;
-            if(flag === false) {
-                var setData = {};
-                setData[safeHost] = {title: blogTitle, posts: postsNumber, create: Date.now()};
-                storage.set(setData);
-            }
+            storage.getBytesInUse(function(bytes) {
+                if(bytes/storage.QUOTA_BYTES <= allowedStorageVolume) {
+                    var setData = {};
+                    setData[safeHost] = {title: blogTitle, posts: postsNumber, create: Date.now()};
+                    storage.set(setData);
+                }
+            });
             popInfo();
         });
     }
