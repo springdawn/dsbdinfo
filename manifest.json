@@ -1,11 +1,13 @@
 {
     "name":"dsbdinfo",
-    "version":"0.1",
+    "version":"0.1.1",
     "manifest_version":2,
 
     "description":"ポスト数を表示",
 
-    "permissions":["http://api.tumblr.com/v2/blog/*"],
+    "permissions":[
+        "http://api.tumblr.com/v2/blog/*",
+        "storage"],
 
     "content_scripts":[
         {
