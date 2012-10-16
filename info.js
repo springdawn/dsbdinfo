@@ -2,7 +2,6 @@
     var popup = jQuery("<div>").addClass("dsbdinfo_popup").appendTo(jQuery("body"));
     var host, blogTitle, postsNumber;
     var storage = chrome.storage.local;
-    var fillStorage = false;
     var offsetTop, offsetLeft;
     var allowedStorageVolume = 0.5; // percentage of the total(0 to 1)
     var expire = 1000*60*60; // milliseconds
