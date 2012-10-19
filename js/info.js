@@ -11,7 +11,9 @@
     chrome.extension.sendMessage({greeting: "hello", isPosts: "", isFollowers: ""}, function(response) {
         isPosts = response.isPosts;
         isFollowers = response.isFollowers;
-        console.log(isPosts, isFollowers);
+        isNoticeAll = response.isNoticeAll;
+        isNoticeReblog = response.isNoticeReblog;
+        isNoticeLike = response.isNoticeLike;
 
         if(isPosts === "true") {
             popup = jQuery("<div>").addClass("dsbdinfo_popup").appendTo(jQuery("body"));
@@ -21,6 +23,29 @@
 
         if(isFollowers === "true") {
             jQuery("a.followers>span.count").hide();
+        }
+
+        if(isNoticeAll === "true") {
+                jQuery("li.notification").hide();
+                jQuery("ol#posts")[0].addEventListener('DOMNodeInserted',function(evt) {
+                    var target = jQuery(evt.target).is("li.notification")? jQuery(evt.target): null;
+                    target? target.hide(): null;
+                });
+        } else if(isNoticeReblog === "true" || isNoticeLike === "true") {
+            if(isNoticeReblog === "true") {
+                jQuery("li.notification:has(div.notification_type_icon[class*=reblog_icon])").hide();
+                jQuery("ol#posts")[0].addEventListener('DOMNodeInserted',function(evt) {
+                    var target = jQuery(evt.target).is("li.notification:has(div.notification_type_icon[class*=reblog_icon])")? jQuery(evt.target): null;
+                    target? target.hide(): null;
+                });
+            }
+            if(isNoticeLike === "true") {
+                jQuery("li.notification:has(div.notification_type_icon[class*=like_icon])").hide();
+                jQuery("ol#posts")[0].addEventListener('DOMNodeInserted',function(evt) {
+                    var target = jQuery(evt.target).is("li.notification:has(div.notification_type_icon[class*=like_icon])")? jQuery(evt.target): null;
+                    target? target.hide(): null;
+                });
+            }
         }
     });
 
