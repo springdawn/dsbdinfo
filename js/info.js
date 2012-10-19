@@ -5,15 +5,14 @@
     var offsetTop, offsetLeft;
     var allowedStorageVolume = 0.5; // percentage of the total(0 to 1)
     var expire = 1000*60*60; // milliseconds
-    var isPosts, isFollowers;
     var popup;
 
-    chrome.extension.sendMessage({greeting: "hello", isPosts: "", isFollowers: ""}, function(response) {
-        isPosts = response.isPosts;
-        isFollowers = response.isFollowers;
-        isNoticeAll = response.isNoticeAll;
-        isNoticeReblog = response.isNoticeReblog;
-        isNoticeLike = response.isNoticeLike;
+    chrome.extension.sendMessage({greeting: "hello"}, function(response) {
+        var isPosts = response.isPosts;
+        var isFollowers = response.isFollowers;
+        var isNoticeAll = response.isNoticeAll;
+        var isNoticeReblog = response.isNoticeReblog;
+        var isNoticeLike = response.isNoticeLike;
 
         if(isPosts === "true") {
             popup = jQuery("<div>").addClass("dsbdinfo_popup").appendTo(jQuery("body"));
