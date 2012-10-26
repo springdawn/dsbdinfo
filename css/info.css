@@ -1,0 +1,16 @@
+div.dsbdinfo_popup {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    margin-top: 25px;
+    padding: 5px 10px;
+    z-index: 99;
+}
+div.dsbdinfo_draggable_box {
+    position: absolute;
+    padding: 5px 10px;
+    background-color: #fff;
+    -webkit-border-radius: 10px;
+    z-index: 99;
+    cursor: move;
+}

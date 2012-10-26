@@ -13,6 +13,7 @@
         var isNoticeAll = response.isNoticeAll;
         var isNoticeReblog = response.isNoticeReblog;
         var isNoticeLike = response.isNoticeLike;
+        var isBox = response.isBox;
 
         if(isPosts === "true") {
             popup = jQuery("<div>").addClass("dsbdinfo_popup").appendTo(jQuery("body"));
@@ -46,9 +47,12 @@
                 });
             }
         }
+
+        if(isBox === "true") {
+            showBox();
+        }
     });
 
-    storage.clear(function(){console.log("storage is cleared.")});
     storage.getBytesInUse(function(bytes){console.log(bytes + " of " + chrome.storage.local.QUOTA_BYTES + " bytes is used.")});
 
     function ifHover(obj) {
@@ -101,7 +105,7 @@
     }
 
     function popInfo() {
-        popup.html(blogTitle + '<br>ポスト数:' + postsNumber);
+        popup.html(blogTitle + '<br>posts: ' + postsNumber);
         popup.css({
             "top": offsetTop,
             "left": offsetLeft

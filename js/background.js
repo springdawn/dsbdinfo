@@ -8,7 +8,8 @@
                     isFollowers: localStorage["followers"]||"false",
                     isNoticeAll: localStorage["noticeAll"]||"false",
                     isNoticeReblog: localStorage["noticeReblog"]||"false",
-                    isNoticeLike: localStorage["noticeLike"]||"false"
+                    isNoticeLike: localStorage["noticeLike"]||"false",
+                    isBox: localStorage["box"]||"false"
                 });
             }
     });
