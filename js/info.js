@@ -48,7 +48,7 @@
             }
         }
 
-        if(isBox === "true") {
+        if(isBox === "true" && jQuery("#posts").length > 0) {
             showBox();
         }
     });

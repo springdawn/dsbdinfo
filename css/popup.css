@@ -1,8 +1,0 @@
-div.dsbdinfo_popup {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    margin-top: 25px;
-    padding: 5px 10px;
-    z-index: 99;
-}
