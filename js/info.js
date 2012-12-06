@@ -23,6 +23,7 @@
 
         if(isFollowers === "true") {
             jQuery("a.followers>span.count").hide();
+            jQuery("a.followers").hover(function() {jQuery("a.followers>span.count").show();}, function() {jQuery("a.followers>span.count").hide();});
         }
 
         if(isNoticeAll === "true") {
