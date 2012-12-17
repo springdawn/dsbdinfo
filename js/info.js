@@ -73,7 +73,7 @@
 
     function ifHoverOut() {
         popup.html("");
-        jQuery(".dsbdinfo_popup").hide(100);
+        popup.hide(100);
     }
 
     function accessStorage() {
