@@ -18,9 +18,9 @@
         if(isPosts === "true") {
             popup = jQuery("<div>").addClass("dsbdinfo_popup").appendTo(jQuery("body"));
             jQuery(document).on("mouseover","div.post_info>a", function(event) {
-                ifHover(jQuery(this))
+                ifHover(jQuery(this));
             }).on("mouseout","div.post_info>a", function(event) {
-                ifHoverOut()
+                ifHoverOut();
             });
         }
 
