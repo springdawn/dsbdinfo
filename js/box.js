@@ -5,6 +5,7 @@ function showBox(){
     var offset = {};
     storage.get("boxOffset", function(data) {
         if(jQuery.isEmptyObject(data)) {
+            obj.css({position: "absolute", top: 0, left: 0});
             render();
             return;
         }
