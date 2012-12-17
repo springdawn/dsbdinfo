@@ -17,13 +17,18 @@
 
         if(isPosts === "true") {
             popup = jQuery("<div>").addClass("dsbdinfo_popup").appendTo(jQuery("body"));
-            jQuery("div.post_info>a").live('mouseover', function(){ifHover(jQuery(this))});
-            jQuery("div.post_info>a").live('mouseout', function(){ifHoverOut()});
+            jQuery(document).on("mouseover","div.post_info>a", function(event) {
+                ifHover(jQuery(this))
+            }).on("mouseout","div.post_info>a", function(event) {
+                ifHoverOut()
+            });
         }
 
         if(isFollowers === "true") {
-            jQuery("a.followers>span.count").hide();
-            jQuery("a.followers").hover(function() {jQuery("a.followers>span.count").show();}, function() {jQuery("a.followers>span.count").hide();});
+            var followersLink = jQuery("a.followers"),
+            followersCount = followersLink.children("span.count");
+            followersCount.hide();
+            followersLink.hover(function() {followersCount.show();}, function() {followersCount.hide();});
         }
 
         if(isNoticeAll === "true") {
