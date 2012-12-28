@@ -9,6 +9,7 @@
                     isNoticeAll: localStorage["noticeAll"]||"false",
                     isNoticeReblog: localStorage["noticeReblog"]||"false",
                     isNoticeLike: localStorage["noticeLike"]||"false",
+                    isNoticeRight: localStorage["noticeRight"]||"false",
                     isBox: localStorage["box"]||"false"
                 });
             }

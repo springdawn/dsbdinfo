@@ -5,6 +5,7 @@ jQuery(document).ready(function() {
     var objNoticeAll = jQuery("#noticeHideAll");
     var objNoticeReblog = jQuery("#noticeHideReblog");
     var objNoticeLike = jQuery("#noticeHideLike");
+    var objNoticeRight= jQuery("#noticeHideRight");
     var objBox = jQuery("#boxShow");
 
 
@@ -13,6 +14,7 @@ jQuery(document).ready(function() {
     objNoticeAll[0].checked = jQuery.isEmptyObject(localStorage["noticeAll"])? false: localStorage["noticeAll"]==="true"? true: false;
     objNoticeReblog[0].checked = jQuery.isEmptyObject(localStorage["noticeReblog"])? false: localStorage["noticeReblog"]==="true"? true: false;
     objNoticeLike[0].checked = jQuery.isEmptyObject(localStorage["noticeLike"])? false: localStorage["noticeLike"]==="true"? true: false;
+    objNoticeRight[0].checked = jQuery.isEmptyObject(localStorage["noticeRight"])? false: localStorage["noticeRight"]==="true"? true: false;
     objBox[0].checked = jQuery.isEmptyObject(localStorage["box"])? false: localStorage["box"]==="true"? true: false;
 
     if(objNoticeAll[0].checked) {
@@ -40,6 +42,9 @@ jQuery(document).ready(function() {
     });
     objNoticeLike.click(function() {
         localStorage["noticeLike"] = objNoticeLike[0].checked;
+    });
+    objNoticeRight.click(function() {
+        localStorage["noticeRight"] = objNoticeRight[0].checked;
     });
     objBox.click(function() {
         localStorage["box"] = objBox[0].checked;

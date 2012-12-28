@@ -13,6 +13,7 @@
         var isNoticeAll = response.isNoticeAll;
         var isNoticeReblog = response.isNoticeReblog;
         var isNoticeLike = response.isNoticeLike;
+        var isNoticeRight= response.isNoticeRight;
         var isBox = response.isBox;
 
         if(isPosts === "true") {
@@ -52,6 +53,12 @@
                     target? target.hide(): null;
                 });
             }
+        }
+
+        if(isNoticeRight === "true") {
+            jQuery("ul#recommended_tumblelogs").hide();
+            jQuery("div#tumblr_radar").hide();
+            jQuery("a.add_and_remove").hide();
         }
 
         if(isBox === "true" && jQuery("#posts").length > 0) {
