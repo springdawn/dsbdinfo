@@ -10,7 +10,15 @@ div.dsbdinfo_draggable_box {
     position: absolute;
     padding: 5px 10px;
     background-color: #fff;
-    -webkit-border-radius: 10px;
+    border-radius: 10px;
     z-index: 99;
     cursor: move;
+}
+div.dsbdinfo_img_popup {
+    display: none;
+    position: absolute;
+}
+div.dsbdinfo_img_popup>img {
+    border-radius: 2px;
+    z-index: 99;
 }

@@ -5,6 +5,7 @@ jQuery(document).ready(function() {
     var objNoticeAll = jQuery("#noticeHideAll");
     var objNoticeReblog = jQuery("#noticeHideReblog");
     var objNoticeLike = jQuery("#noticeHideLike");
+    var objNoticeImg= jQuery("#noticeShowImg");
     var objNoticeRight= jQuery("#noticeHideRight");
     var objBox = jQuery("#boxShow");
 
@@ -14,6 +15,7 @@ jQuery(document).ready(function() {
     objNoticeAll[0].checked = jQuery.isEmptyObject(localStorage["noticeAll"])? false: localStorage["noticeAll"]==="true"? true: false;
     objNoticeReblog[0].checked = jQuery.isEmptyObject(localStorage["noticeReblog"])? false: localStorage["noticeReblog"]==="true"? true: false;
     objNoticeLike[0].checked = jQuery.isEmptyObject(localStorage["noticeLike"])? false: localStorage["noticeLike"]==="true"? true: false;
+    objNoticeImg[0].checked = jQuery.isEmptyObject(localStorage["noticeImg"])? false: localStorage["noticeImg"]==="true"? true: false;
     objNoticeRight[0].checked = jQuery.isEmptyObject(localStorage["noticeRight"])? false: localStorage["noticeRight"]==="true"? true: false;
     objBox[0].checked = jQuery.isEmptyObject(localStorage["box"])? false: localStorage["box"]==="true"? true: false;
 
@@ -36,12 +38,16 @@ jQuery(document).ready(function() {
         localStorage["noticeAll"] = objNoticeAll[0].checked;
         localStorage["noticeReblog"] = objNoticeReblog[0].checked;
         localStorage["noticeLike"] = objNoticeLike[0].checked;
+        localStorage["noticeImg"] = objNoticeImg[0].checked;
     });
     objNoticeReblog.click(function() {
         localStorage["noticeReblog"] = objNoticeReblog[0].checked;
     });
     objNoticeLike.click(function() {
         localStorage["noticeLike"] = objNoticeLike[0].checked;
+    });
+    objNoticeImg.click(function() {
+        localStorage["noticeImg"] = objNoticeImg[0].checked;
     });
     objNoticeRight.click(function() {
         localStorage["noticeRight"] = objNoticeRight[0].checked;
@@ -54,5 +60,12 @@ jQuery(document).ready(function() {
 
 function childControl(cls, disable) {
     jQuery(cls+">p.child>input.child").each(function() {this.checked = disable? true: false; this.disabled = disable? true: false;});
-    disable? jQuery(cls+">p.child").addClass("mask"): jQuery(cls+">p.child").removeClass("mask");
+    jQuery(cls+">p.child_reverse>input.child_reverse").each(function() {this.checked = disable? false: true; this.disabled = disable? true: false;});
+    if(disable) {
+        jQuery(cls+">p.child").addClass("mask");
+        jQuery(cls+">p.child_reverse").addClass("mask");
+    } else {
+        jQuery(cls+">p.child").removeClass("mask");
+        jQuery(cls+">p.child_reverse").removeClass("mask");
+    }
 }

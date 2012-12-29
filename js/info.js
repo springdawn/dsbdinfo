@@ -13,6 +13,7 @@
         var isNoticeAll = response.isNoticeAll;
         var isNoticeReblog = response.isNoticeReblog;
         var isNoticeLike = response.isNoticeLike;
+        var isNoticeImg = response.isNoticeImg;
         var isNoticeRight= response.isNoticeRight;
         var isBox = response.isBox;
 
@@ -38,7 +39,7 @@
                     var target = jQuery(evt.target).is("li.notification")? jQuery(evt.target): null;
                     target? target.hide(): null;
                 });
-        } else if(isNoticeReblog === "true" || isNoticeLike === "true") {
+        } else if(isNoticeReblog === "true" || isNoticeLike === "true" || isNoticeImg === "true") {
             if(isNoticeReblog === "true") {
                 jQuery("li.notification:has(div.notification_type_icon[class*=reblog_icon])").hide();
                 jQuery("ol#posts")[0].addEventListener('DOMNodeInserted',function(evt) {
@@ -51,6 +52,31 @@
                 jQuery("ol#posts")[0].addEventListener('DOMNodeInserted',function(evt) {
                     var target = jQuery(evt.target).is("li.notification:has(div.notification_type_icon[class*=like_icon])")? jQuery(evt.target): null;
                     target? target.hide(): null;
+                });
+            }
+            if(isNoticeImg === "true") {
+                var timer = null;
+                var imgPop = jQuery("<div>").addClass("dsbdinfo_img_popup").appendTo("body");
+                jQuery(document).on("mouseenter", "li.notification:has(.notification_right img)", function(e) {
+                    var me = this;
+                    if(!timer) {
+                        timer = setTimeout(function() {
+                            timer = null;
+                            var imgObj = jQuery(me).find(".notification_right img");
+                            var imgUrl = imgObj.attr("src");
+                            imgUrl = imgUrl.replace("_75sq.", "_100.");
+                            var offsets = imgObj.offset();
+                            imgPop.html("<img src='"+imgUrl+"'>");
+                            imgPop.css({"top":offsets.top, "left":offsets.left, "height":"0px"});
+                            imgPop.show(100);
+                        }, 50);
+                    }
+                });
+                jQuery(document).on("mouseleave", "li.notification:has(.notification_right img)", function(e) {
+                    setTimeout(function() {
+                        imgPop.hide();
+                        imgPop.html("");
+                    }, 50);
                 });
             }
         }
@@ -124,4 +150,5 @@
             "left": offsetLeft
         }).show(100);
     }
+
 })();
