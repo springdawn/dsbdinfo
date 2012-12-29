@@ -18,7 +18,7 @@
         var isBox = response.isBox;
 
         if(isPosts === "true") {
-            popup = jQuery("<div>").addClass("dsbdinfo_popup").appendTo(jQuery("body"));
+            popup = jQuery("<div>").addClass("dsbdinfo_popup").appendTo("body");
             jQuery(document).on("mouseover","div.post_info>a", function(event) {
                 ifHover(jQuery(this));
             }).on("mouseout","div.post_info>a", function(event) {
@@ -67,7 +67,7 @@
                             imgUrl = imgUrl.replace("_75sq.", "_100.");
                             var offsets = imgObj.offset();
                             imgPop.html("<img src='"+imgUrl+"'>");
-                            imgPop.css({"top":offsets.top, "left":offsets.left, "height":"0px"});
+                            imgPop.css({"top":offsets.top, "left":offsets.left});
                             imgPop.show(100);
                         }, 50);
                     }
