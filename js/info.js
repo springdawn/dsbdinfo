@@ -54,20 +54,23 @@
                 var imgPop = jQuery(document.createElement("div")).addClass("dsbdinfo_img_popup").appendTo("body");
                 jQuery(document).on("mouseenter", ".notification:has('.notification_right img')", function(e) {
                     var me = this;
-                    if(!timer) {
-                        timer = setTimeout(function() {
-                            timer = null;
-                            var imgObj = jQuery(me).find(".notification_right img");
-                            var imgUrl = imgObj.attr("src");
-                            imgUrl = imgUrl.replace("_75sq.", "_100.");
-                            var offsets = imgObj.offset();
-                            imgPop.html("<img src='"+imgUrl+"'>").css({"top":offsets.top, "left":offsets.left}).show(100);
-                        }, 20);
-                    }
+                    if(timer) clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        timer = null;
+                        var imgObj = jQuery(me).find(".notification_right img");
+                        var imgUrl = imgObj.attr("src");
+                        imgUrl = imgUrl.replace("_75sq.", "_100.");
+                        var offsets = imgObj.offset();
+                        imgPop.html("<img src='"+imgUrl+"'>").css({"top":offsets.top, "left":offsets.left}).show(50);
+                    }, 350);
                 }).on("mouseleave", ".notification:has('.notification_right img')", function(e) {
-                    setTimeout(function() {
-                        imgPop.hide().html("");
-                    }, 20);
+                    if(timer) clearTimeout(timer);
+                    else {
+                        imgPop.hide(50);
+                        setTimeout(function() {
+                            imgPop.html("");
+                        }, 50);
+                    }
                 });
             }
         }
