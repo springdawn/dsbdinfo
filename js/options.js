@@ -24,15 +24,15 @@ jQuery(document).ready(function() {
     }
 
     objPosts.click(function() {
-        localStorage["posts"] = objPosts.prop("checked");
+        localStorage["posts"] = this.checked;
     });
     objFollowers.click(function() {
-        localStorage["followers"] = objFollowers.prop("checked");
+        localStorage["followers"] = this.checked;
     });
     objNoticeAll.click(function() {
-        if(objNoticeAll.prop("checked")) {
+        if(this.checked) {
             childControl("div.notice", true);
-        } else if(!objNoticeAll.prop("checked")) {
+        } else if(!this.checked) {
             childControl("div.notice", false);
         }
         localStorage["noticeAll"] = objNoticeAll.prop("checked");
@@ -41,19 +41,19 @@ jQuery(document).ready(function() {
         localStorage["noticeImg"] = objNoticeImg.prop("checked");
     });
     objNoticeReblog.click(function() {
-        localStorage["noticeReblog"] = objNoticeReblog.prop("checked");
+        localStorage["noticeReblog"] = this.checked;
     });
     objNoticeLike.click(function() {
-        localStorage["noticeLike"] = objNoticeLike.prop("checked");
+        localStorage["noticeLike"] = this.checked;
     });
     objNoticeImg.click(function() {
-        localStorage["noticeImg"] = objNoticeImg.prop("checked");
+        localStorage["noticeImg"] = this.checked;
     });
     objNoticeRight.click(function() {
-        localStorage["noticeRight"] = objNoticeRight.prop("checked");
+        localStorage["noticeRight"] = this.checked;
     });
     objBox.click(function() {
-        localStorage["box"] = objBox.prop("checked");
+        localStorage["box"] = this.checked;
     });
 
 });
@@ -68,4 +68,4 @@ function childControl(cls, disable) {
         jQuery(cls+">p.child").removeClass("mask");
         jQuery(cls+">p.child_reverse").removeClass("mask");
     }
-}
+};
