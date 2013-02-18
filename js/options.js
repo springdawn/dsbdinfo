@@ -10,50 +10,50 @@ jQuery(document).ready(function() {
     var objBox = jQuery("#boxShow");
 
 
-    objPosts[0].checked = jQuery.isEmptyObject(localStorage["posts"])? true: localStorage["posts"]==="true"? true: false;
-    objFollowers[0].checked = jQuery.isEmptyObject(localStorage["followers"])? false: localStorage["followers"]==="true"? true: false;
-    objNoticeAll[0].checked = jQuery.isEmptyObject(localStorage["noticeAll"])? false: localStorage["noticeAll"]==="true"? true: false;
-    objNoticeReblog[0].checked = jQuery.isEmptyObject(localStorage["noticeReblog"])? false: localStorage["noticeReblog"]==="true"? true: false;
-    objNoticeLike[0].checked = jQuery.isEmptyObject(localStorage["noticeLike"])? false: localStorage["noticeLike"]==="true"? true: false;
-    objNoticeImg[0].checked = jQuery.isEmptyObject(localStorage["noticeImg"])? false: localStorage["noticeImg"]==="true"? true: false;
-    objNoticeRight[0].checked = jQuery.isEmptyObject(localStorage["noticeRight"])? false: localStorage["noticeRight"]==="true"? true: false;
-    objBox[0].checked = jQuery.isEmptyObject(localStorage["box"])? false: localStorage["box"]==="true"? true: false;
+    objPosts.prop("checked", jQuery.isEmptyObject(localStorage["posts"])? true: localStorage["posts"]==="true"? true: false);
+    objFollowers.prop("checked", jQuery.isEmptyObject(localStorage["followers"])? false: localStorage["followers"]==="true"? true: false);
+    objNoticeAll.prop("checked", jQuery.isEmptyObject(localStorage["noticeAll"])? false: localStorage["noticeAll"]==="true"? true: false);
+    objNoticeReblog.prop("checked", jQuery.isEmptyObject(localStorage["noticeReblog"])? false: localStorage["noticeReblog"]==="true"? true: false);
+    objNoticeLike.prop("checked", jQuery.isEmptyObject(localStorage["noticeLike"])? false: localStorage["noticeLike"]==="true"? true: false);
+    objNoticeImg.prop("checked", jQuery.isEmptyObject(localStorage["noticeImg"])? false: localStorage["noticeImg"]==="true"? true: false);
+    objNoticeRight.prop("checked", jQuery.isEmptyObject(localStorage["noticeRight"])? false: localStorage["noticeRight"]==="true"? true: false);
+    objBox.prop("checked", jQuery.isEmptyObject(localStorage["box"])? false: localStorage["box"]==="true"? true: false);
 
-    if(objNoticeAll[0].checked) {
+    if(objNoticeAll.prop("checked")) {
         childControl("div.notice", true);
     }
 
     objPosts.click(function() {
-        localStorage["posts"] = objPosts[0].checked;
+        localStorage["posts"] = objPosts.prop("checked");
     });
     objFollowers.click(function() {
-        localStorage["followers"] = objFollowers[0].checked;
+        localStorage["followers"] = objFollowers.prop("checked");
     });
     objNoticeAll.click(function() {
-        if(objNoticeAll[0].checked) {
+        if(objNoticeAll.prop("checked")) {
             childControl("div.notice", true);
-        } else if(!objNoticeAll[0].checked) {
+        } else if(!objNoticeAll.prop("checked")) {
             childControl("div.notice", false);
         }
-        localStorage["noticeAll"] = objNoticeAll[0].checked;
-        localStorage["noticeReblog"] = objNoticeReblog[0].checked;
-        localStorage["noticeLike"] = objNoticeLike[0].checked;
-        localStorage["noticeImg"] = objNoticeImg[0].checked;
+        localStorage["noticeAll"] = objNoticeAll.prop("checked");
+        localStorage["noticeReblog"] = objNoticeReblog.prop("checked");
+        localStorage["noticeLike"] = objNoticeLike.prop("checked");
+        localStorage["noticeImg"] = objNoticeImg.prop("checked");
     });
     objNoticeReblog.click(function() {
-        localStorage["noticeReblog"] = objNoticeReblog[0].checked;
+        localStorage["noticeReblog"] = objNoticeReblog.prop("checked");
     });
     objNoticeLike.click(function() {
-        localStorage["noticeLike"] = objNoticeLike[0].checked;
+        localStorage["noticeLike"] = objNoticeLike.prop("checked");
     });
     objNoticeImg.click(function() {
-        localStorage["noticeImg"] = objNoticeImg[0].checked;
+        localStorage["noticeImg"] = objNoticeImg.prop("checked");
     });
     objNoticeRight.click(function() {
-        localStorage["noticeRight"] = objNoticeRight[0].checked;
+        localStorage["noticeRight"] = objNoticeRight.prop("checked");
     });
     objBox.click(function() {
-        localStorage["box"] = objBox[0].checked;
+        localStorage["box"] = objBox.prop("checked");
     });
 
 });

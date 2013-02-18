@@ -1,6 +1,6 @@
 {
     "name":"dsbdinfo",
-    "version":"0.1.9.3",
+    "version":"0.1.10",
     "manifest_version":2,
 
     "description":"ポスト数を表示",
@@ -13,13 +13,14 @@
     "options_page":"html/options.html",
 
     "background":{
-        "page":"html/background.html"
+        "persistent":false,
+        "scripts":["js/background.js"]
     },
 
     "content_scripts":[
         {
             "matches":["http://www.tumblr.com/dashboard*"],
-            "js":["js/jquery-1.8.2.min.js","js/jquery-ui-1.9.0.custom.min.js","js/info.js","js/date-utils.min.js","js/box.js"],
+            "js":["js/jquery-1.9.1.min.js","js/jquery-ui-1.9.0.custom.min.js","js/info.js","js/date-utils.min.js","js/box.js"],
             "css":["css/info.css"],
             "run_at":"document_end"
         }
