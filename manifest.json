@@ -20,7 +20,7 @@
     "content_scripts":[
         {
             "matches":["http://www.tumblr.com/dashboard*"],
-            "js":["js/jquery-1.9.1.min.js","js/jquery-ui-1.9.0.custom.min.js","js/info.js","js/date-utils.min.js","js/box.js"],
+            "js":["js/jquery-1.9.1.min.js","js/jquery-ui-1.10.1.custom.min.js","js/info.js","js/date-utils.min.js","js/box.js"],
             "css":["css/info.css"],
             "run_at":"document_end"
         }
