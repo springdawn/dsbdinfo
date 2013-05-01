@@ -1,9 +1,8 @@
 (function() {
     chrome.extension.onMessage.addListener(
         function(request, sender, sendResponse) {
-            if (request.greeting == "hello") {
+            if (request.command === "option") {
                 sendResponse({
-                    farewell: "goodbye",
                     isPosts: localStorage["posts"]||"true",
                     isFollowers: localStorage["followers"]||"false",
                     isNoticeAll: localStorage["noticeAll"]||"false",
@@ -12,6 +11,14 @@
                     isNoticeImg: localStorage["noticeImg"]||"false",
                     isNoticeRight: localStorage["noticeRight"]||"false",
                     isBox: localStorage["box"]||"false"
+                });
+            } else if(request.command === "addDate") {
+                localStorage["lastDate"] = request.date;
+                sendResponse({
+                });
+            } else if(request.command === "getDate") {
+                sendResponse({
+                    date: localStorage["lastDate"]||null
                 });
             }
     });

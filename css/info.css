@@ -10,9 +10,12 @@ div.dsbdinfo_draggable_box {
     position: absolute;
     padding: 5px 10px;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 6px;
     z-index: 99;
     cursor: move;
+}
+div.dsbdinfo_draggable_box.fixed {
+    position: fixed;
 }
 div.dsbdinfo_img_popup {
     display: none;

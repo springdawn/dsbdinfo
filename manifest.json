@@ -1,9 +1,9 @@
 {
     "name":"dsbdinfo",
-    "version":"0.2.0",
+    "version":"0.2.1",
     "manifest_version":2,
 
-    "description":"ポスト数を表示",
+    "description":"dashboardで色々",
 
     "permissions":[
         "http://api.tumblr.com/v2/blog/*",
