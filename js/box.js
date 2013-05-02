@@ -25,7 +25,6 @@ function showBox(){
             else now.setHours(parseInt(dateParts[0]));
             now.setMinutes(parseInt(dateParts[2]));
             lastDateString = now.toFormat("HH24:MI");
-            console.log(dateParts,now.toFormat("MM/DD HH24:MI"));
         }
         var prevPostDate = "prev last seen: "+lastDateString;
         obj.html(dateString+"<br>\n"+prevPostDate);
