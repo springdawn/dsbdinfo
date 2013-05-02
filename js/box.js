@@ -21,10 +21,11 @@ function showBox(){
         var lastDateString = "";
         if(lastDate) {
             var dateParts = lastDate.match(/\d{1,2}|:|[ap]m/g);
-            if(dateParts[3]) now.setHours(dateParts[3]==="am"? (dateParts[0]==="12"? 0:parseInt(dateParts[0])): (dateParts[0]==="12"? 12:  parseInt(dateParts[0]+12)));
+            if(dateParts[3]) now.setHours(dateParts[3]==="am"? (dateParts[0]==="12"? 0:parseInt(dateParts[0])): (dateParts[0]==="12"? 12:  parseInt(dateParts[0])+12));
             else now.setHours(parseInt(dateParts[0]));
             now.setMinutes(parseInt(dateParts[2]));
             lastDateString = now.toFormat("HH24:MI");
+            console.log(dateParts,now.toFormat("MM/DD HH24:MI"));
         }
         var prevPostDate = "prev last seen: "+lastDateString;
         obj.html(dateString+"<br>\n"+prevPostDate);
