@@ -14,6 +14,7 @@
         var isNoticeImg = response.isNoticeImg;
         var isNoticeRight= response.isNoticeRight;
         var isBox = response.isBox;
+        var boxfix = response.boxFixed;
         if(isPosts === "true") {
             popup = jQuery(document.createElement("div")).addClass("dsbdinfo_popup").appendTo("body");
             jQuery(document).on("mouseover","div.post_info>a", function(event) {
@@ -88,7 +89,7 @@
                 var date = target.find("a.permalink").prop("title").match(dateRegex);
                 if(date) chrome.runtime.sendMessage({command:"addDate", date:date[0]}, function(response){});
             });
-            showBox();
+            showBox(boxfix === "true");
             var dateFirst = jQuery("li.post a.permalink").last().prop("title").match(dateRegex);
             if(dateFirst) chrome.runtime.sendMessage({command:"addDate", date:dateFirst[0]}, function(response){});
         }

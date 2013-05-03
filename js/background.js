@@ -10,7 +10,8 @@
                     isNoticeLike: localStorage["noticeLike"]||"false",
                     isNoticeImg: localStorage["noticeImg"]||"false",
                     isNoticeRight: localStorage["noticeRight"]||"false",
-                    isBox: localStorage["box"]||"false"
+                    isBox: localStorage["box"]||"false",
+                    boxFixed: localStorage["boxfix"]||"false"
                 });
             } else if(request.command === "addDate") {
                 localStorage["lastDate"] = request.date;
@@ -19,6 +20,10 @@
             } else if(request.command === "getDate") {
                 sendResponse({
                     date: localStorage["lastDate"]||null
+                });
+            } else if(request.command === "boxfix") {
+                localStorage["boxfix"] = request.fix;
+                sendResponse({
                 });
             }
     });

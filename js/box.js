@@ -1,4 +1,4 @@
-function showBox(){
+function showBox(boxfix){
     var storage = chrome.storage.local;
     var now = new Date();
     var obj = jQuery("<div>").addClass("dsbdinfo_draggable_box");
@@ -12,6 +12,7 @@ function showBox(){
         offset.top = data.boxOffset.top;
         offset.left = data.boxOffset.left;
         obj.css({top: offset.top, left: offset.left});
+        if(boxfix) obj.addClass("fixed");
         render();
     });
     function render() {obj.prependTo("body")};
@@ -33,6 +34,7 @@ function showBox(){
         }});
         obj.dblclick(function() {
             jQuery(this).toggleClass("fixed");
+            chrome.runtime.sendMessage({command: "boxfix", fix: jQuery(this).hasClass("fixed")}, function(response){});
         });
     });
 }
