@@ -5,7 +5,7 @@
     var allowedStorageVolume = 0.5; // percentage of the total(0 to 1)
     var expire = 1000*60*60; // milliseconds
     var popup;
-    chrome.extension.sendMessage({command: "option"}, function(response) {
+    chrome.runtime.sendMessage({command: "option"}, function(response) {
         var isPosts = response.isPosts;
         var isFollowers = response.isFollowers;
         var isNoticeAll = response.isNoticeAll;
@@ -86,11 +86,11 @@
                 var target = jQuery(evt.target).is("li.post")? jQuery(evt.target): null;
                 if(!target) return;
                 var date = target.find("a.permalink").prop("title").match(dateRegex);
-                if(date) chrome.extension.sendMessage({command:"addDate", date:date[0]}, function(response){});
+                if(date) chrome.runtime.sendMessage({command:"addDate", date:date[0]}, function(response){});
             });
             showBox();
             var dateFirst = jQuery("li.post a.permalink").last().prop("title").match(dateRegex);
-            if(dateFirst) chrome.extension.sendMessage({command:"addDate", date:dateFirst[0]}, function(response){});
+            if(dateFirst) chrome.runtime.sendMessage({command:"addDate", date:dateFirst[0]}, function(response){});
         }
     });
     storage.getBytesInUse(function(bytes){console.log(bytes + " of " + chrome.storage.local.QUOTA_BYTES + " bytes is used.")});

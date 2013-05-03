@@ -16,7 +16,7 @@ function showBox(){
     });
     function render() {obj.prependTo("body")};
     var dateString = "load: "+now.toFormat("MM/DD HH24:MI:SS");
-    chrome.extension.sendMessage({command: "getDate"}, function(response) {
+    chrome.runtime.sendMessage({command: "getDate"}, function(response) {
         var lastDate = response.date;
         var lastDateString = "";
         if(lastDate) {
