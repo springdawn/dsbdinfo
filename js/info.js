@@ -1,4 +1,14 @@
 (function(){
+    /* test
+    jQuery(document).on("click",".toast",function(evt){console.log(evt,"\n",this)})
+    var atarget = document.querySelector('#posts');
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            console.log(mutation.type, mutation.target, mutation.addedNodes);
+        });
+    });
+    observer.observe(atarget,{attributes: true, childList: true, characterData: true, subtree: true});
+     test */
     var host, blogTitle, postsNumber;
     var storage = chrome.storage.local;
     var offsetTop, offsetLeft;
@@ -30,25 +40,36 @@
             followersLink.hover(function() {followersCount.show();}, function() {followersCount.hide();});
         }
         if(isNoticeAll === "true") {
-                jQuery("li.notification").hide();
-                jQuery("#posts")[0].addEventListener('DOMNodeInserted',function(evt) {
-                    var target = jQuery(evt.target).is("li.notification")? jQuery(evt.target): null;
+            var posts = document.querySelector('#posts');
+            jQuery("li.notification").hide();
+            var noteobs = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    var target = jQuery(mutation.addedNodes).is("li.notification")? jQuery(mutation.addedNodes): null;
                     target? target.hide(): null;
                 });
+            });
+            noteobs.observe(posts, {childList: true});
         } else if(isNoticeReblog === "true" || isNoticeLike === "true" || isNoticeImg === "true") {
+            var posts = document.querySelector('#posts');
             if(isNoticeReblog === "true") {
                 jQuery(".notification_reblog").hide();
-                jQuery("#posts")[0].addEventListener('DOMNodeInserted',function(evt) {
-                    var target = jQuery(evt.target).is(".notification_reblog")? jQuery(evt.target): null;
-                    target? target.hide(): null;
+                var rbobs = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        var target = jQuery(mutation.addedNodes).is(".notification_reblog")? jQuery(mutation.addedNodes): null;
+                        target? target.hide(): null;
+                    });
                 });
+                rbobs.observe(posts, {childList: true});
             }
             if(isNoticeLike === "true") {
                 jQuery(".notification_like").hide();
-                jQuery("#posts")[0].addEventListener('DOMNodeInserted',function(evt) {
-                    var target = jQuery(evt.target).is(".notification_like")? jQuery(evt.target): null;
-                    target? target.hide(): null;
+                var lkobs = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        var target = jQuery(mutation.addedNodes).is(".notification_like")? jQuery(mutation.addedNodes): null;
+                        target? target.hide(): null;
+                    });
                 });
+                lkobs.observe(posts, {childList: true});
             }
             if(isNoticeImg === "true") {
                 var timer = null;
@@ -83,12 +104,16 @@
         }
         if(isBox === "true" && jQuery("#posts").length > 0) {
             var dateRegex = /\d{1,2}:\d{2}([ap]m)?/;
-            jQuery("#posts")[0].addEventListener('DOMNodeInserted',function(evt) {
-                var target = jQuery(evt.target).is("li.post")? jQuery(evt.target): null;
-                if(!target) return;
-                var date = target.find("a.permalink").prop("title").match(dateRegex);
-                if(date) chrome.runtime.sendMessage({command:"addDate", date:date[0]}, function(response){});
+            var posts = document.querySelector('#posts');
+            var boxdateobs = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    var target = jQuery(mutation.addedNodes).is("li.post")? jQuery(mutation.addedNodes): null;
+                    if(!target) return;
+                    var date = target.find("a.permalink").prop("title").match(dateRegex);
+                    if(date) chrome.runtime.sendMessage({command:"addDate", date:date[0]}, function(response){});
+                });
             });
+            boxdateobs.observe(posts, {childList: true});
             showBox(boxfix === "true");
             var dateFirst = jQuery("li.post a.permalink").last().prop("title").match(dateRegex);
             if(dateFirst) chrome.runtime.sendMessage({command:"addDate", date:dateFirst[0]}, function(response){});
