@@ -44,43 +44,43 @@
             jQuery("li.notification").hide();
             var noteobs = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {
-                    var target = jQuery(mutation.addedNodes).is("li.notification")? jQuery(mutation.addedNodes): null;
-                    target? target.hide(): null;
+                    var target = jQuery(mutation.addedNodes);
+                    if(target.is("li.notification")) target.hide();
                 });
             });
             noteobs.observe(posts, {childList: true});
         } else if(isNoticeReblog === "true" || isNoticeLike === "true" || isNoticeImg === "true") {
             var posts = document.querySelector('#posts');
             if(isNoticeReblog === "true") {
-                jQuery(".notification_reblog").hide();
+                jQuery("li.notification_reblog").hide();
                 var rbobs = new MutationObserver(function(mutations) {
                     mutations.forEach(function(mutation) {
-                        var target = jQuery(mutation.addedNodes).is(".notification_reblog")? jQuery(mutation.addedNodes): null;
-                        target? target.hide(): null;
+                        var target = jQuery(mutation.addedNodes);
+                        if(target.is("li.notification_reblog")) target.hide();
                     });
                 });
                 rbobs.observe(posts, {childList: true});
             }
             if(isNoticeLike === "true") {
-                jQuery(".notification_like").hide();
+                jQuery("li.notification_like").hide();
                 var lkobs = new MutationObserver(function(mutations) {
                     mutations.forEach(function(mutation) {
-                        var target = jQuery(mutation.addedNodes).is(".notification_like")? jQuery(mutation.addedNodes): null;
-                        target? target.hide(): null;
+                        var target = jQuery(mutation.addedNodes)
+                        if(target.is("li.notification_like")) target.hide();
                     });
                 });
                 lkobs.observe(posts, {childList: true});
             }
             if(isNoticeImg === "true") {
                 var timer = null;
-                jQuery(document).on("mouseenter", ".notification:has('.notification_right img')", function(e) {
+                jQuery(document).on("mouseenter", "li.notification:has('div.notification_right img')", function(e) {
                     var me = this;
                     if(timer) clearTimeout(timer);
                     timer = setTimeout(function() {
                         timer = null;
                         zoomImage(jQuery(me));
                     }, 350);
-                }).on("mouseleave", ".notification:has('.notification_right img')", function(e) {
+                }).on("mouseleave", "li.notification:has('div.notification_right img')", function(e) {
                     if(timer) clearTimeout(timer);
                     else {
                         imgBoxHide();
@@ -100,17 +100,18 @@
         if(isNoticeRight === "true") {
             jQuery("#recommended_tumblelogs").hide();
             jQuery("#tumblr_radar").hide();
-            jQuery(".add_and_remove").hide();
+            jQuery("a.add_and_remove").hide();
         }
         if(isBox === "true" && jQuery("#posts").length > 0) {
             var dateRegex = /\d{1,2}:\d{2}([ap]m)?/;
             var posts = document.querySelector('#posts');
             var boxdateobs = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {
-                    var target = jQuery(mutation.addedNodes).is("li.post")? jQuery(mutation.addedNodes): null;
-                    if(!target) return;
-                    var date = target.find("a.permalink").prop("title").match(dateRegex);
-                    if(date) chrome.runtime.sendMessage({command:"addDate", date:date[0]}, function(response){});
+                    var target = jQuery(mutation.addedNodes);
+                    if(target.is("li.post")) {
+                        var date = target.find("a.permalink").prop("title").match(dateRegex);
+                        if(date) chrome.runtime.sendMessage({command:"addDate", date:date[0]}, function(response){});
+                    }
                 });
             });
             boxdateobs.observe(posts, {childList: true});
