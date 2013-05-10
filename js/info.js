@@ -1,20 +1,30 @@
 (function(){
-    /* test
-    jQuery(document).on("click",".toast",function(evt){console.log(evt,"\n",this)})
-    var atarget = document.querySelector('#posts');
-    var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            console.log(mutation.type, mutation.target, mutation.addedNodes);
-        });
-    });
-    observer.observe(atarget,{attributes: true, childList: true, characterData: true, subtree: true});
-     test */
     var host, blogTitle, postsNumber;
     var storage = chrome.storage.local;
     var offsetTop, offsetLeft;
     var allowedStorageVolume = 0.5; // percentage of the total(0 to 1)
     var expire = 1000*60*60; // milliseconds
     var popup;
+
+    jQuery(document).keydown(function(e) {
+        if(String.fromCharCode(e.which)==="N"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey) {
+            var height = jQuery(document).scrollTop();
+            var targetPost = null;
+            jQuery("li.post[data-post-id]").each(function() {
+                if(this.offsetTop > height) {
+                    targetPost = this;
+                    return false;
+                }
+            });
+            if(targetPost) {
+                var targetId = parseInt(jQuery(targetPost).attr("data-post-id"));
+                chrome.runtime.sendMessage({command: "newtab", pid: targetId+1}, function(response) {
+                    targetPost = null;
+                });
+            }
+        }
+    });
+
     chrome.runtime.sendMessage({command: "option"}, function(response) {
         var isPosts = response.isPosts;
         var isFollowers = response.isFollowers;

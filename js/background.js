@@ -2,6 +2,7 @@
     chrome.runtime.onMessage.addListener(
         function(request, sender, sendResponse) {
             if (request.command === "option") {
+//                setTimeout(function(){chrome.tabs.create({},function(){console.log("yeah")});},500);
                 sendResponse({
                     isPosts: localStorage["posts"]||"true",
                     isFollowers: localStorage["followers"]||"false",
@@ -25,6 +26,10 @@
                 localStorage["boxfix"] = request.fix;
                 sendResponse({
                 });
-            }
+            } else if(request.command === "newtab") {
+                var pid = request.pid;
+                if(pid) chrome.tabs.create({url: "http://www.tumblr.com/dashboard/2/"+pid});
+                else chrome.tabs.create({url: "http://www.tumblr.com/dashboard/2"});
+            } else sendResponse({});
     });
 })();
