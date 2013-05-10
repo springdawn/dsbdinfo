@@ -7,7 +7,7 @@
     var popup;
 
     jQuery(document).keydown(function(e) {
-        if(String.fromCharCode(e.which)==="N"&&!e.shiftKey&&!e.ctrlKey&&!e.altKey&&!e.metaKey) {
+        if(String.fromCharCode(e.which)==="N"&&e.altKey&&!e.shiftKey&&!e.ctrlKey&&!e.metaKey) {
             var height = jQuery(document).scrollTop();
             var targetPost = null;
             jQuery("li.post[data-post-id]").each(function() {
