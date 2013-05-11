@@ -83,17 +83,23 @@
             }
             if(isNoticeImg === "true") {
                 var timer = null;
-                jQuery(document).on("mouseenter", "li.notification:has('div.notification_right img')", function(e) {
-                    var me = this;
+                var poped = null;
+                jQuery(document).on("mouseenter", "li.notification:has('div.notification_right img'),div.dsbdinfo_img_popup", function(e) {
+                    if(jQuery(e.toElement).parent().is("div.dsbdinfo_img_popup")) return;
+                    var me = jQuery(this);
                     if(timer) clearTimeout(timer);
                     timer = setTimeout(function() {
                         timer = null;
-                        zoomImage(jQuery(me));
+                        zoomImage(me);
+                        poped = me;
                     }, 350);
-                }).on("mouseleave", "li.notification:has('div.notification_right img')", function(e) {
+                }).on("mouseleave", "li.notification:has('div.notification_right img'),div.dsbdinfo_img_popup", function(e) {
+                    var toElm = jQuery(e.toElement);
+                    if((poped&&toElm.parents().is(poped))||toElm.parents().is("div.dsbdinfo_img_popup")) return;
                     if(timer) clearTimeout(timer);
                     else {
                         imgBoxHide();
+                        poped = null;
 //                        setTimeout(function() {
 //                            imgPop.html("");
 //                        }, 50);
