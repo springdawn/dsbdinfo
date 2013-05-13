@@ -4,6 +4,7 @@
     "manifest_version":2,
 
     "description":"dashboardで色々",
+    "icons":{"128":"dsbdinfo_icon.png"},
 
     "permissions":[
         "http://api.tumblr.com/v2/blog/*",
