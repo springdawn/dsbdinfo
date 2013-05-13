@@ -1,10 +1,11 @@
 {
     "name":"dsbdinfo",
-    "version":"0.2.2",
+    "version":"0.2.4",
     "manifest_version":2,
 
     "description":"dashboardで色々",
     "icons":{"128":"dsbdinfo_icon.png"},
+    "update_url": "https://dl.dropboxusercontent.com/u/24600276/dsbdinfo/update.xml",
 
     "permissions":[
         "http://api.tumblr.com/v2/blog/*",
