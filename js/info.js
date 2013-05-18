@@ -122,18 +122,20 @@
             var dateRegex = /\d{1,2}:\d{2}([ap]m)?/;
             var posts = document.querySelector('#posts');
             var boxdateobs = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    var target = jQuery(mutation.addedNodes);
-                    if(target.is("li.post")) {
-                        var date = target.find("a.permalink").prop("title").match(dateRegex);
-                        if(date) chrome.runtime.sendMessage({command:"addDate", date:date[0]}, function(response){});
-                    }
+                mutations.some(function(mutation) {
+                    var target = jQuery(mutation.addedNodes).toArray().reverse();
+                    jQuery(target).each(function() {
+                        if(jQuery(this).is("li.post")) {
+                            getDate(jQuery(this));
+                            return false;
+                        }
+                    });
                 });
             });
             boxdateobs.observe(posts, {childList: true});
             showBox(boxfix === "true");
             var dateFirst = jQuery("li.post a.permalink").last().prop("title").match(dateRegex);
-            if(dateFirst) chrome.runtime.sendMessage({command:"addDate", date:dateFirst[0]}, function(response){});
+            getDate(jQuery("li.post[id!=new_post]").last());
         }
     });
     storage.getBytesInUse(function(bytes){console.log(bytes + " of " + chrome.storage.local.QUOTA_BYTES + " bytes is used.")});

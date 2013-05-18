@@ -18,14 +18,11 @@ function showBox(boxfix){
     function render() {obj.prependTo("body")};
     var dateString = "load: "+now.toFormat("MM/DD HH24:MI:SS");
     chrome.runtime.sendMessage({command: "getDate"}, function(response) {
-        var lastDate = response.date;
+        var lastDate = parseInt(response.date);
         var lastDateString = "";
         if(lastDate) {
-            var dateParts = lastDate.match(/\d{1,2}|:|[ap]m/g);
-            if(dateParts[3]) now.setHours(dateParts[3]==="am"? (dateParts[0]==="12"? 0:parseInt(dateParts[0])): (dateParts[0]==="12"? 12:  parseInt(dateParts[0])+12));
-            else now.setHours(parseInt(dateParts[0]));
-            now.setMinutes(parseInt(dateParts[2]));
-            lastDateString = now.toFormat("HH24:MI");
+            var dateObj = new Date(lastDate);
+            lastDateString = dateObj.toFormat("MM/DD HH24:MI:SS");
         }
         var prevPostDate = "prev last seen: "+lastDateString;
         obj.html(dateString+"<br>\n"+prevPostDate);
@@ -36,5 +33,16 @@ function showBox(boxfix){
             jQuery(this).toggleClass("fixed");
             chrome.runtime.sendMessage({command: "boxfix", fix: jQuery(this).hasClass("fixed")}, function(response){});
         });
+    });
+}
+
+function getDate(post) {
+    var postId = post.attr("data-post-id");
+    var baseBlogName = post.attr("data-tumblelog-name");
+    var requestUrl = "http://api.tumblr.com/v2/blog/"+baseBlogName+".tumblr.com/posts";
+    jQuery.get(requestUrl, {api_key: "uvmddiGyiyHKS0ZGJSVqtEinfIVnyOVp3wUtBGJYPBGrgFKi9S", id: postId}, function(data){
+        var timestamp = data.response.posts[0].timestamp;
+        var date = timestamp*1000;
+        chrome.runtime.sendMessage({command: "addDate", date: date}, function(reseponse){});
     });
 }
