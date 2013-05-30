@@ -41,7 +41,6 @@ function getDate(post) {
     var postId = post.attr("data-post-id");
     var baseBlogName = post.attr("data-tumblelog-name");
     var requestUrl = "http://api.tumblr.com/v2/blog/"+baseBlogName+".tumblr.com/posts";
-    console.log(requestUrl);
     jQuery.get(requestUrl, {api_key: "uvmddiGyiyHKS0ZGJSVqtEinfIVnyOVp3wUtBGJYPBGrgFKi9S", id: postId}, function(data){
         var timestamp = data.response.posts[0].timestamp;
         var date = timestamp*1000;

@@ -124,7 +124,6 @@
             var boxdateobs = new MutationObserver(function(mutations) {
                 mutations.some(function(mutation) {
                     var target = jQuery(mutation.addedNodes).toArray().reverse();
-                    console.log(target);
                     jQuery(target).each(function() {
                         if(jQuery(this).is("li.post_container")) {
                             getDate(jQuery(this).find("div.post"));
