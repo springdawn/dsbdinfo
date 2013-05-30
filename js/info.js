@@ -10,7 +10,7 @@
         if(String.fromCharCode(e.which)==="N"&&e.altKey&&!e.shiftKey&&!e.ctrlKey&&!e.metaKey) {
             var height = jQuery(document).scrollTop();
             var targetPost = null;
-            jQuery("li.post[data-post-id]").each(function() {
+            jQuery("div.post[data-post-id]").each(function() {
                 if(this.offsetTop > height) {
                     targetPost = this;
                     return false;
@@ -124,9 +124,10 @@
             var boxdateobs = new MutationObserver(function(mutations) {
                 mutations.some(function(mutation) {
                     var target = jQuery(mutation.addedNodes).toArray().reverse();
+                    console.log(target);
                     jQuery(target).each(function() {
-                        if(jQuery(this).is("li.post")) {
-                            getDate(jQuery(this));
+                        if(jQuery(this).is("li.post_container")) {
+                            getDate(jQuery(this).find("div.post"));
                             return false;
                         }
                     });
@@ -134,8 +135,8 @@
             });
             boxdateobs.observe(posts, {childList: true});
             showBox(boxfix === "true");
-            var dateFirst = jQuery("li.post a.permalink").last().prop("title").match(dateRegex);
-            getDate(jQuery("li.post[id!=new_post]").last());
+//            var dateFirst = jQuery("div.post a.permalink").last().prop("title").match(dateRegex);
+//            getDate(jQuery("div.post[id!=new_post]").last());
         }
     });
     storage.getBytesInUse(function(bytes){console.log(bytes + " of " + chrome.storage.local.QUOTA_BYTES + " bytes is used.")});

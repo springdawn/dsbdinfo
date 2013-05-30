@@ -24,7 +24,8 @@ function showBox(boxfix){
             var dateObj = new Date(lastDate);
             lastDateString = dateObj.toFormat("MM/DD HH24:MI:SS");
         }
-        var prevPostDate = "prev last seen: "+lastDateString;
+        jQuery("<span>").html("prev oldest: ").addClass("dsbdinfo_time");
+        var prevPostDate = "prev oldest: "+lastDateString;
         obj.html(dateString+"<br>\n"+prevPostDate);
         obj.draggable({stop: function(e, ui){
             storage.set({boxOffset: {top: ui.offset.top, left: ui.offset.left}});
@@ -40,6 +41,7 @@ function getDate(post) {
     var postId = post.attr("data-post-id");
     var baseBlogName = post.attr("data-tumblelog-name");
     var requestUrl = "http://api.tumblr.com/v2/blog/"+baseBlogName+".tumblr.com/posts";
+    console.log(requestUrl);
     jQuery.get(requestUrl, {api_key: "uvmddiGyiyHKS0ZGJSVqtEinfIVnyOVp3wUtBGJYPBGrgFKi9S", id: postId}, function(data){
         var timestamp = data.response.posts[0].timestamp;
         var date = timestamp*1000;
