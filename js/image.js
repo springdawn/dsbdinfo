@@ -1,10 +1,11 @@
 var imgBox = jQuery(document.createElement("div")).addClass("dsbdinfo_img_popup").appendTo("body");
 function zoomImage(target) {
+    var postUrl = target.find(".notification_right>a").attr("href");
     var imgObj = target.find(".notification_right img");
     var imgUrl = imgObj.attr("src");
     imgUrl = imgUrl.replace("_75sq.", "_100.");
     var offsets = imgObj.offset();
-    imgBox.html("<img src='"+imgUrl+"'>").css({"top":offsets.top, "left":offsets.left}).show(50);
+    imgBox.html("<a href='"+postUrl+"'><img src='"+imgUrl+"'></a>").css({"top":offsets.top, "left":offsets.left}).show(50);
 }
 
 function moveToNotification() {
