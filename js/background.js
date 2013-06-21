@@ -12,7 +12,8 @@
                     isNoticeImg: localStorage["noticeImg"]||"false",
                     isNoticeRight: localStorage["noticeRight"]||"false",
                     isBox: localStorage["box"]||"false",
-                    boxFixed: localStorage["boxfix"]||"false"
+                    boxFixed: localStorage["boxfix"]||"false",
+                    isTimeleap: localStorage["timeleap"]||"false"
                 });
             } else if(request.command === "addDate") {
                 localStorage["lastDate"] = request.date;

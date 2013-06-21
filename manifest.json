@@ -1,6 +1,6 @@
 {
     "name":"dsbdinfo",
-    "version":"0.2.7",
+    "version":"0.2.8",
     "manifest_version":2,
 
     "description":"dashboardで色々",
@@ -9,6 +9,7 @@
 
     "permissions":[
         "http://api.tumblr.com/v2/blog/*",
+        "http://kiri-tori.tumblr.com/*",
         "storage"
     ],
 
@@ -22,7 +23,7 @@
     "content_scripts":[
         {
             "matches":["http://www.tumblr.com/dashboard*"],
-            "js":["js/jquery-2.0.0.min.js","js/jquery-ui-1.10.1.custom.min.js","js/jquery.ba-throttle-debounce.min.js","js/image.js","js/info.js","js/date-utils.min.js","js/box.js"],
+            "js":["js/jquery-2.0.0.min.js","js/jquery-ui-1.10.1.custom.min.js","js/jquery.ba-throttle-debounce.min.js","js/timeleap.js","js/image.js","js/info.js","js/date-utils.min.js","js/box.js"],
             "css":["css/info.css"],
             "run_at":"document_end"
         }

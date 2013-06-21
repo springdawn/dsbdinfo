@@ -35,6 +35,7 @@
         var isNoticeRight= response.isNoticeRight;
         var isBox = response.isBox;
         var boxfix = response.boxFixed;
+        var isTimeleap = response.isTimeleap;
         if(isPosts === "true") {
             popup = jQuery(document.createElement("div")).addClass("dsbdinfo_popup").appendTo("body");
             jQuery(document).on("mouseover","div.post_info>a", function(event) {
@@ -136,6 +137,9 @@
             showBox(boxfix === "true");
 //            var dateFirst = jQuery("div.post a.permalink").last().prop("title").match(dateRegex);
 //            getDate(jQuery("div.post[id!=new_post]").last());
+        }
+        if(isTimeleap === "true") {
+          getTimeFromKiritori();
         }
     });
     storage.getBytesInUse(function(bytes){console.log(bytes + " of " + chrome.storage.local.QUOTA_BYTES + " bytes is used.")});

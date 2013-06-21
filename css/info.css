@@ -25,3 +25,22 @@ div.dsbdinfo_img_popup>img {
     border-radius: 2px;
     z-index: 99;
 }
+#dsbdinfo_timeleap {
+    background-color: #fff;
+    border-radius: 6px;
+    position: absolute;
+    right: 5%;
+    padding: 0 5px;
+    list-style-type: none;
+}
+#dsbdinfo_timeleap:hover {
+    background-color: #add;
+}
+#dsbdinfo_timeleap>li>span {
+    padding-right: 10px;
+}
+#dsbdinfo_timeleap>li>ul {
+    display: none;
+    padding-left: 0;
+    list-style-type: none;
+}

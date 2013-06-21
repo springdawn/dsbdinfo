@@ -8,6 +8,7 @@ jQuery(document).ready(function() {
     var objNoticeImg= jQuery("#noticeShowImg");
     var objNoticeRight= jQuery("#noticeHideRight");
     var objBox = jQuery("#boxShow");
+    var objTimeleap = jQuery("#timeleap");
 
 
     objPosts.prop("checked", jQuery.isEmptyObject(localStorage["posts"])? true: localStorage["posts"]==="true"? true: false);
@@ -18,6 +19,7 @@ jQuery(document).ready(function() {
     objNoticeImg.prop("checked", jQuery.isEmptyObject(localStorage["noticeImg"])? false: localStorage["noticeImg"]==="true"? true: false);
     objNoticeRight.prop("checked", jQuery.isEmptyObject(localStorage["noticeRight"])? false: localStorage["noticeRight"]==="true"? true: false);
     objBox.prop("checked", jQuery.isEmptyObject(localStorage["box"])? false: localStorage["box"]==="true"? true: false);
+    objTimeleap.prop("checked", jQuery.isEmptyObject(localStorage["timeleap"])? false: localStorage["timeleap"]==="true"? true: false);
 
     if(objNoticeAll.prop("checked")) {
         childControl("div.notice", true);
@@ -55,7 +57,9 @@ jQuery(document).ready(function() {
     objBox.click(function() {
         localStorage["box"] = this.checked;
     });
-
+    objTimeleap.click(function() {
+        localStorage["timeleap"] = this.checked;
+    });
 });
 
 function childControl(cls, disable) {
