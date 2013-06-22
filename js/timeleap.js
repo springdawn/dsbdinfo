@@ -23,9 +23,7 @@ function showTimeleapBox(items) {
         var item = jQuery("<li>").html(el);
         boxItems.append(item);
     });
-    boxItems.appendTo(boxTitle);
-    boxTitle.appendTo(box);
-    box.prependTo(document.body);
+    box.append(boxTitle.append(boxItems)).prependTo(document.body);
 
     jQuery("#dsbdinfo_timeleap>li").hover(function() {jQuery(this).children("ul").slideDown(100)}, function() {jQuery(this).children("ul").hide()});
 }
