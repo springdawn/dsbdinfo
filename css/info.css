@@ -39,8 +39,16 @@ div.dsbdinfo_img_popup>img {
 #dsbdinfo_timeleap>li>span {
     padding-right: 10px;
 }
-#dsbdinfo_timeleap>li>ul {
+#dsbdinfo_timeleap>li ul {
     display: none;
     padding-left: 0;
     list-style-type: none;
+}
+#dsbdinfo_timeleap>li ul .insert {
+    display: none;
+}
+.dsbdinfo_timeleap.load_next {
+    text-align: center;
+    margin: 0 auto -5px auto;
+    font-size: 5px;
 }
